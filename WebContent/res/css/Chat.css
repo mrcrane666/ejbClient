@@ -1,0 +1,7 @@
+@CHARSET "ISO-8859-1";
+.chatBox{
+	background-color: lightgrey;
+}
+.chatBoxFieldset{
+	margin-bottom: 5px;
+}

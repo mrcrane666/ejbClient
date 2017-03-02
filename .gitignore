@@ -1,0 +1,13 @@
+*.log
+*.classpath
+*.factorypath
+*.portletProperties
+*.project
+*.jsdtscope
+*.prefs
+*.component
+*.name
+*.container
+*.jar
+*.class
+.settings
