@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" id="com.ibm.callejbportlet.CallEjbPortlet.0880400f95">
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	id="com.ibm.callejbportlet.CallEjbPortlet.0880400f95">
 	<portlet>
 		<portlet-name>CallEjbPortlet</portlet-name>
 		<display-name>CallEjbPortlet</display-name>
@@ -13,6 +16,8 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_defaults</portlet-mode>
 		</supports>
 		<supported-locale>de</supported-locale>
 		<resource-bundle>com.ibm.callejbportlet.nl.CallEjbPortletResource</resource-bundle>
@@ -22,5 +27,9 @@
 			<keywords>CallEjbPortlet</keywords>
 		</portlet-info>
 	</portlet>
+	<custom-portlet-mode>
+		<description>shared edit mode</description>
+		<portlet-mode>edit_defaults</portlet-mode>
+	</custom-portlet-mode>
 	<default-namespace>http://CallEjbPortlet/</default-namespace>
 </portlet-app>

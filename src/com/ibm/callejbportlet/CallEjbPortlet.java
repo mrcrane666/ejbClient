@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.Properties;
 
 import javax.naming.Context;
@@ -66,15 +67,19 @@ public class CallEjbPortlet extends GenericPortlet {
 	public void doView(RenderRequest request, RenderResponse response)
 			throws PortletException, IOException {
 		String err = chat.getErrMessage();
-		if (err.equals("")) {
-			request.setAttribute("messages", chat.getMessages());
-			System.out.println(request.getUserPrincipal());
-			request.setAttribute("user", request.getUserPrincipal());
-		}else{
-			request.setAttribute("errMessage", err);
-			request.setAttribute("messages", chat.getMessages());
+		request.setAttribute("user", request.getUserPrincipal());
+		if (request.getUserPrincipal() != null) {
+			if (err.equals("")) {
+				request.setAttribute("messages", chat.getMessages());
+			} else {
+				request.setAttribute("errMessage", err);
+				request.setAttribute("messages", chat.getMessages());				
+			}
+		} else {
+			request.setAttribute("errMessage",
+					"Please log in to see or write messages!");
 		}
-		
+
 		response.setContentType(request.getResponseContentType());
 		PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(
 				getJspFilePath(request, VIEW_JSP));
@@ -97,9 +102,18 @@ public class CallEjbPortlet extends GenericPortlet {
 	public void serveResource(ResourceRequest request, ResourceResponse response)
 			throws PortletException, java.io.IOException {
 		Gson gson = new Gson();
-		response.resetBuffer();
-		response.getWriter().print(gson.toJson(chat.getMessages()));
-		response.flushBuffer();
+		LinkedList<String> tmpMessages = new LinkedList<String>();
+		tmpMessages.add(request.getUserPrincipal().toString());
+		tmpMessages.addAll(chat.getMessages());
+		if (request.getUserPrincipal() != null) {
+			response.resetBuffer();
+			response.getWriter().print(gson.toJson(tmpMessages));
+			response.flushBuffer();
+		} else {
+			response.resetBuffer();
+			response.getWriter().print(gson.toJson(""));
+			response.flushBuffer();
+		}
 	}
 
 	private static String getJspFilePath(RenderRequest request, String jspFile) {
