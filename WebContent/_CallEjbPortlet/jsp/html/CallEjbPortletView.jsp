@@ -38,7 +38,7 @@
 					</div>
 				</c:if>
 			</c:if>
-			<c:if test="${not fn:startsWith(message,'/')}">(Public) ${message }</c:if>
+			<c:if test="${not fn:startsWith(message,'/')}">(Public) ${message }<br></c:if>
 		</c:forEach>
 	</div>
 </fieldset>
