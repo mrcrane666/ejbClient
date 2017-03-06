@@ -69,18 +69,20 @@
 				var messages = JSON.parse(data);
 				var allMessages = "";
 				var user = messages[0];
-				a
 				for (var i = 1; i < messages.length; i++) {
-					var tmp = messages[i];	
-					if (tmp.startsWith("/")) {
-					alert("jap");
-						if (tmp.substring(tmp.indexOf("&"), tmp.length()).equals(user)) {
+					var tmp = messages[i];
+					if (tmp.substring(0, 1) == ("/")) {
+						if (tmp.substring(1, tmp.indexOf('&')) === user) {
 							var privateMessage = tmp.substring(
-									tmp.indexOf("&") + 1, tmp.length());
+									tmp.indexOf('&') + 1, tmp.length);
+							allMessages = allMessages
+									+ "<div style='color: blue'>(Private) "
+									+ privateMessage + "<br></div>";
 						}
+					}
 
-					} else {
-						allMessages = allMessages + tmp + "<br>";
+					else {
+						allMessages = allMessages + "(Public) " + tmp + "<br>";
 					}
 
 				}
